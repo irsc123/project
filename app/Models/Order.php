@@ -26,5 +26,31 @@ class Order extends Model
     {
         return $this->hasMany(OrderItem::class);
     }
+
+    /**
+     * اسم حالة الطلب بالعربية.
+     */
+    public function getStatusLabelAttribute(): string
+    {
+        return [
+            'pending'    => 'قيد الانتظار',
+            'processing' => 'قيد التجهيز',
+            'shipped'    => 'تم الشحن',
+            'completed'  => 'مكتمل',
+            'cancelled'  => 'ملغي',
+        ][$this->status] ?? $this->status;
+    }
+
+    /**
+     * اسم طريقة الدفع بالعربية.
+     */
+    public function getPaymentMethodLabelAttribute(): string
+    {
+        return [
+            'cash'     => 'الدفع عند الاستلام',
+            'transfer' => 'تحويل بنكي',
+            'card'     => 'بطاقة',
+        ][$this->payment_method] ?? ($this->payment_method ?? '-');
+    }
 }
 

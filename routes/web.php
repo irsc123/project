@@ -6,6 +6,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,6 +70,11 @@ Route::middleware(['auth'])->group(function () {
 
     // حذف عنصر من السلة
     Route::delete('/cart/{id}', [CartController::class, 'remove'])->name('cart.remove');
+
+    // إتمام الطلب
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+    Route::get('/checkout/success/{order}', [CheckoutController::class, 'success'])->name('checkout.success');
 });
 
 
@@ -128,8 +135,21 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     // صفحة الداش بورد
     Route::get('/admin', function () {
-        return view('admin.dashboard');
+        $productsCount = \App\Models\Product::count();
+        $categoriesCount = \App\Models\Category::count();
+        $ordersCount = \App\Models\Order::count();
+        $usersCount = \App\Models\User::count();
+
+        return view('admin.dashboard', compact('productsCount', 'categoriesCount', 'ordersCount', 'usersCount'));
     })->name('admin.dashboard');
+
+    // إدارة الطلبات
+    Route::get('/admin/orders', [OrderController::class, 'index'])->name('admin.orders.index');
+    Route::get('/admin/orders/{order}', [OrderController::class, 'show'])->name('admin.orders.show');
+    Route::patch('/admin/orders/{order}/status', [OrderController::class, 'updateStatus'])->name('admin.orders.updateStatus');
+
+    // تقرير من اشترى منتج معين
+    Route::get('/admin/products/{product}/buyers', [OrderController::class, 'productBuyers'])->name('admin.products.buyers');
 
 });
 

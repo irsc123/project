@@ -329,6 +329,13 @@
                                                 <i class="fas fa-percent"></i> خصم
                                             </a>
 
+                                            {{-- تقرير من اشترى --}}
+                                            <a href="{{ route('admin.products.buyers', $product->id) }}" 
+                                               class="btn btn-info btn-sm text-white" 
+                                               title="من اشترى هذا المنتج وكم">
+                                                <i class="fas fa-users"></i> المشتريون
+                                            </a>
+
                                             {{-- زر حذف --}}
                                             <form action="{{ route('products.destroy', $product->id) }}" 
                                                   method="POST"

@@ -249,12 +249,14 @@
                 </div>
             </div>
             <div class="col-md-3 col-6 mb-3">
-                <div class="stat-card">
-                    <div class="stat-number">{{ $ordersCount ?? 0 }}</div>
-                    <div class="stat-label">
-                        <i class="fas fa-shopping-cart"></i> الطلبات
+                <a href="{{ route('admin.orders.index') }}" class="text-decoration-none">
+                    <div class="stat-card">
+                        <div class="stat-number">{{ $ordersCount ?? 0 }}</div>
+                        <div class="stat-label">
+                            <i class="fas fa-shopping-cart"></i> الطلبات
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-md-3 col-6 mb-3">
                 <div class="stat-card">
@@ -300,13 +302,13 @@
 
         <!-- زر الطلبات -->
         <div class="col-md-4 mb-4">
-            <a href="#" class="text-decoration-none">
+            <a href="{{ route('admin.orders.index') }}" class="text-decoration-none">
                 <div class="dashboard-card">
                     <div class="dashboard-icon">
                         <i class="fas fa-truck" style="color: #667eea;"></i>
                     </div>
                     <h4>إدارة الطلبات</h4>
-                    <p class="text-muted">متابعة وتحديث الطلبات (قريباً)</p>
+                    <p class="text-muted">من اشترى، ماذا، الكمية، تفاصيل الطلب</p>
                 </div>
             </a>
         </div>

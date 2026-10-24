@@ -69,7 +69,10 @@
                     </tbody>
                 </table>
 
-                <h5 class="mt-3">المجموع الكلي: {{ $total }} ريال</h5>
+                <div class="d-flex justify-content-between align-items-center mt-4">
+                    <h5 class="mb-0">المجموع الكلي: {{ $total }} ريال</h5>
+                    <a href="{{ route('checkout.index') }}" class="btn btn-success">إتمام الطلب</a>
+                </div>
 
             @else
                 <p>سلتك فارغة حالياً.</p>
